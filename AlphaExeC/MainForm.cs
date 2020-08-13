@@ -1,12 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Chame
- * Date: 31/05/2020
- * Time: 13:16
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
+﻿using System;
 using System.IO;
 using System.Threading;
 using System.Drawing;
@@ -15,122 +7,144 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using TGASharpLib;
 
-namespace AlphaExeC
-{
-	/// <summary>
-	/// Description of MainForm.
-	/// </summary>
-	public partial class MainForm : Form
-	{
-		public MainForm()
-		{
-			InitializeComponent();
-		}
-		
-		public void WritetoStatus(string status)
-		{
-			statusTextBox.SelectionStart = 0;
-	        statusTextBox.SelectionLength = 0;
-	        statusTextBox.SelectedText = status;
-	 	}
-		
-		public void getThumbnail(string path)
-		{
-			try
-			{
-				if (path.ToLower().EndsWith(".tga"))
-				{
-					var tga = new TGA(path);
-					var bitmap = (Bitmap)tga;
-					pictureBox1.Image = bitmap.GetThumbnailImage(135, 135, ()=>false, IntPtr.Zero);
-					bitmap.Dispose();
-				}
-				else
-				{
-					Image src = Image.FromFile(path);
-					pictureBox1.Image = src.GetThumbnailImage(135, 135, ()=>false, IntPtr.Zero);
-					src.Dispose();
-				}
-			}
-			catch(Exception a)
-			{
-				pictureBox1.Image = null;
-			}
-		}
-		
-		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-		{
+namespace AlphaExeC {
+    //Handle form events here
+    public partial class MainForm : Form {
+        public MainForm() {
+            //Start main form
+            InitializeComponent();
+        }
+        
+        //Write to the statusTextBox
+        public void WritetoStatus(string status) {
+            statusTextBox.SelectionStart = 0;
+            statusTextBox.SelectionLength = 0;
+            statusTextBox.SelectedText = status;
+        }
 
-			var index = listView1.SelectedItems;
-			string path = System.String.Empty;
-			foreach ( ListViewItem item in index )
-		    {
-				path = item.Text;
-		    }
-			Thread thread = new Thread(() => getThumbnail(path));
-			thread.Start();
-		}
-		
-		void Button6Click(object sender, EventArgs e)
-		{
-			listView1.Items.Clear();
-			pictureBox1.Image = null;
-			statusTextBox.Clear();
-		}
-		
-		void Button4Click(object sender, EventArgs e)
-		{
-			FuncLibrary.Convert("D:\\example.tga", System.String.Empty, "JPG", true, 100);
-		}
-		
-		void Button2Click(object sender, EventArgs e)
-		{
-			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-		    {
-		        textBox2.Text = folderBrowserDialog1.SelectedPath;
-		    }
-		}
-		
-		void Button3Click(object sender, EventArgs e)
-		{
-			string path = textBox2.Text;
-			if (!String.IsNullOrEmpty(path)  &&  Directory.Exists(path))
-			{
-				int filecount = 0;
-				string[] filestoadd = Directory.GetFiles(path); 
-				string[] formats = new string[comboBox2.Items.Count];
-				if (checkBox4.Checked == false)
-			    {
-					formats[0] = comboBox2.Text.ToLower();
-					Array.Resize(ref formats, 1);
-			    }
-				else
-				{
-					for(int i = 0; i < comboBox2.Items.Count; i++)
-					{
-						formats[i] = comboBox2.Items[i].ToString().ToLower();
-					}
-				}
-				foreach(string item in filestoadd)
-				{
-				string itemlower = item.ToLower();
-					foreach (string format in formats)
-				    {
-						if (itemlower.EndsWith("."+format) && listView1.FindItemWithText(itemlower) == null)
-							{
-				            listView1.Items.Add(item);
-							filecount++;
-							}
-				    }
-				}
-				WritetoStatus(filecount.ToString()+" files added.\n");
-			}
-			else
-			{
-				//Add textbox empty warning to status
-		        WritetoStatus("Please select a valid folder first.\n");
-			}
-		}
-	}
+        //Make a thumbnail and set it as preview
+        public void getThumbnail(string path) {
+            try {
+                //TGA images need special loading using TGASharpLib
+                if (path.ToLower().EndsWith(".tga")) {
+                    var tga = new TGA(path);
+                    var bitmap = (Bitmap)tga;
+                    previewBox.Image = bitmap
+                        .GetThumbnailImage(135, 135, ()=>false, IntPtr.Zero);
+
+                    //Queue to the garbage collector
+                    bitmap.Dispose();
+                }
+                else {
+                    Image src = Image.FromFile(path);
+                    previewBox.Image = src
+                        .GetThumbnailImage(135, 135, ()=>false, IntPtr.Zero);
+
+                    src.Dispose();
+                }
+            }
+            //Memory overflow from big images, TODO replace with a image size check
+            catch(Exception a) {
+                previewBox.Image = null;
+            }
+        }
+        
+        //Called when the selected item changes in the list
+        private void imageListSelectedIndexChange(object sender, EventArgs e) {
+
+            string path = System.String.Empty;
+
+            //TODO replace with a 0 index selection
+            foreach (ListViewItem item in imageList.SelectedItems) {
+                path = item.Text;
+            }
+
+            //Run in a thread to avoid blocking the app as thumbnail generates
+            Thread thread = new Thread(() => getThumbnail(path));
+            thread.Start();
+        }
+        
+        //Input related stuff
+        
+        private void inputBrowseClick(object sender, EventArgs e) {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) {
+                inputTextBot.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+        
+        void inputAddClick(object sender, EventArgs e) {
+            string path = inputTextBot.Text;
+            if (!String.IsNullOrEmpty(path)  &&  Directory.Exists(path)) {
+
+                int filecount = 0;
+                string[] filestoadd = Directory.GetFiles(path); 
+                string[] formats = new string[inputFormatDropdown.Items.Count];
+                if (allowMoreFormatsCheckbox.Checked == false) {
+                    formats[0] = inputFormatDropdown.Text.ToLower();
+                    Array.Resize(ref formats, 1);
+                }
+                else {
+                    for(int i = 0; i < inputFormatDropdown.Items.Count; i++) {
+                        formats[i] = inputFormatDropdown.Items[i].ToString().ToLower();
+                    }
+                }
+                foreach(string item in filestoadd) {
+                string itemlower = item.ToLower();
+                    foreach (string format in formats) {
+                        if (itemlower.EndsWith("."+format) 
+                            && imageList.FindItemWithText(itemlower) == null) {
+                            
+                            imageList.Items.Add(item);
+                            filecount++;
+                            }
+                    }
+                }
+                WritetoStatus(filecount.ToString()+" files added.\n");
+            }
+            else {
+                //Add textbox empty warning to status
+                WritetoStatus("Please select a valid folder first.\n");
+            }
+        }
+        
+        //Ouput related stuff
+        
+        void outputBrowseButtonClick(object sender, System.EventArgs e) {
+            //TODO set output folder directly to outputTextBox after selecting folder
+            
+        }
+
+		//Toolbar
+        
+        void convertButtonClick(object sender, EventArgs e) {
+            FuncLibrary.Convert("D:\\example.tga", System.String.Empty, "JPG", true, 100);
+        }
+        
+        void clearButtonClick(object sender, EventArgs e) {
+            imageList.Items.Clear();
+            previewBox.Image = null;
+            statusTextBox.Clear();
+        }
+        
+        void stopButtonClick(object sender, System.EventArgs e) {
+            
+        }
+        
+        
+        void optionsButtonClick(object sender, EventArgs e) {
+            
+        }
+        
+        void helpButtonClick(object sender, System.EventArgs e) {
+            
+        }
+        
+        void aboutButtonClick(object sender, System.EventArgs e) {
+            
+        }
+        
+        void licenseButtonClick(object sender, System.EventArgs e) {
+            
+        }
+    }
 }
-

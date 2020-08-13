@@ -1,31 +1,15 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Chame
- * Date: 31/05/2020
- * Time: 13:16
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
+﻿using System;
 using System.Windows.Forms;
 
-namespace AlphaExeC
-{
-	/// <summary>
-	/// Class with program entry point.
-	/// </summary>
-	internal sealed class Program
-	{
-		/// <summary>
-		/// Program entry point.
-		/// </summary>
-		[STAThread]
-		private static void Main(string[] args)
-		{
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
-		}
-		
-	}
+namespace AlphaExeC {
+    internal sealed class Program {
+    [STAThread]
+        private static void Main(string[] args) {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            //Start the form
+            Application.Run(new MainForm());
+        }
+
+    }
 }
