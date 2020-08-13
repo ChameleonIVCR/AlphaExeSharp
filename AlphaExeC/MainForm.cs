@@ -44,7 +44,7 @@ namespace AlphaExeC {
                 }
             }
             //Memory overflow from big images, TODO replace with a image size check
-            catch(Exception a) {
+            catch(Exception) {
                 previewBox.Image = null;
             }
         }
