@@ -51,7 +51,7 @@ namespace AlphaExeC
 		    this.inputAddButton = new System.Windows.Forms.Button();
 		    this.inputBrowseButton = new System.Windows.Forms.Button();
 		    this.label3 = new System.Windows.Forms.Label();
-		    this.inputTextBot = new System.Windows.Forms.TextBox();
+		    this.inputTextBox = new System.Windows.Forms.TextBox();
 		    this.allowMoreFormatsCheckbox = new System.Windows.Forms.CheckBox();
 		    this.inputFormatDropdown = new System.Windows.Forms.ComboBox();
 		    this.label4 = new System.Windows.Forms.Label();
@@ -228,7 +228,7 @@ namespace AlphaExeC
 		    this.inputsplitContainer.Panel1.Controls.Add(this.inputAddButton);
 		    this.inputsplitContainer.Panel1.Controls.Add(this.inputBrowseButton);
 		    this.inputsplitContainer.Panel1.Controls.Add(this.label3);
-		    this.inputsplitContainer.Panel1.Controls.Add(this.inputTextBot);
+		    this.inputsplitContainer.Panel1.Controls.Add(this.inputTextBox);
 		    // 
 		    // inputsplitContainer.Panel2
 		    // 
@@ -273,11 +273,11 @@ namespace AlphaExeC
 		    // 
 		    // inputTextBot
 		    // 
-		    this.inputTextBot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-		    this.inputTextBot.Location = new System.Drawing.Point(100, 7);
-		    this.inputTextBot.Name = "inputTextBot";
-		    this.inputTextBot.Size = new System.Drawing.Size(241, 20);
-		    this.inputTextBot.TabIndex = 4;
+		    this.inputTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+		    this.inputTextBox.Location = new System.Drawing.Point(100, 7);
+		    this.inputTextBox.Name = "inputTextBot";
+		    this.inputTextBox.Size = new System.Drawing.Size(241, 20);
+		    this.inputTextBox.TabIndex = 4;
 		    // 
 		    // allowMoreFormatsCheckbox
 		    // 
@@ -541,7 +541,7 @@ namespace AlphaExeC
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.ComboBox inputFormatDropdown;
 		private System.Windows.Forms.CheckBox allowMoreFormatsCheckbox;
-		private System.Windows.Forms.TextBox inputTextBot;
+		private System.Windows.Forms.TextBox inputTextBox;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Button inputBrowseButton;
 		private System.Windows.Forms.Button inputAddButton;
