@@ -271,11 +271,11 @@ namespace AlphaExeC
 		    this.label3.TabIndex = 5;
 		    this.label3.Text = "Input Folder:";
 		    // 
-		    // inputTextBot
+		    // inputTextBox
 		    // 
 		    this.inputTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 		    this.inputTextBox.Location = new System.Drawing.Point(100, 7);
-		    this.inputTextBox.Name = "inputTextBot";
+		    this.inputTextBox.Name = "inputTextBox";
 		    this.inputTextBox.Size = new System.Drawing.Size(241, 20);
 		    this.inputTextBox.TabIndex = 4;
 		    // 
@@ -324,7 +324,7 @@ namespace AlphaExeC
 		    this.outputgroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 		    this.outputgroupBox2.Location = new System.Drawing.Point(4, 3);
 		    this.outputgroupBox2.Name = "outputgroupBox2";
-		    this.outputgroupBox2.Size = new System.Drawing.Size(619, 95);
+		    this.outputgroupBox2.Size = new System.Drawing.Size(628, 95);
 		    this.outputgroupBox2.TabIndex = 1;
 		    this.outputgroupBox2.TabStop = false;
 		    this.outputgroupBox2.Text = "Output";
@@ -350,7 +350,7 @@ namespace AlphaExeC
 		    this.outputsplitContainer.Panel2.Controls.Add(this.onlyAlphaChCheckbox);
 		    this.outputsplitContainer.Panel2.Controls.Add(this.outputFormatDropdown);
 		    this.outputsplitContainer.Panel2.Controls.Add(this.label2);
-		    this.outputsplitContainer.Size = new System.Drawing.Size(591, 76);
+		    this.outputsplitContainer.Size = new System.Drawing.Size(600, 76);
 		    this.outputsplitContainer.SplitterDistance = 37;
 		    this.outputsplitContainer.SplitterWidth = 1;
 		    this.outputsplitContainer.TabIndex = 0;
@@ -456,7 +456,6 @@ namespace AlphaExeC
 		    this.imageList.Size = new System.Drawing.Size(1120, 326);
 		    this.imageList.TabIndex = 8;
 		    this.imageList.UseCompatibleStateImageBehavior = false;
-		    this.imageList.View = System.Windows.Forms.View.Details;
 		    this.imageList.SelectedIndexChanged += new System.EventHandler(this.imageListSelectedIndexChange);
 		    // 
 		    // file
