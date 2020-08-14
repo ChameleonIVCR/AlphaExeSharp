@@ -14,6 +14,7 @@ using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using System.Diagnostics;
 using TGASharpLib;
+using ConvertImage;
 
 namespace AlphaExeC
 {
@@ -49,33 +50,26 @@ namespace AlphaExeC
 			string outputpath = System.String.Empty;
 			try
 			{
-				Bitmap bmp;
+
 				if (output == System.String.Empty)
 				{
-					outputpath = Path.GetDirectoryName(filepath)+"\\"+Path.GetFileNameWithoutExtension(filepath)+"_output."+outputformat.ToLower();
+					outputpath = Path.GetDirectoryName(filepath) + "\\" + Path.GetFileNameWithoutExtension(filepath) + "_output." + outputformat.ToLower();
 				}
 				else
 				{
-					outputpath = output+"\\"+Path.GetFileNameWithoutExtension(filepath)+"."+outputformat.ToLower();
+					outputpath = output + "\\" + Path.GetFileNameWithoutExtension(filepath) + "." + outputformat.ToLower();
 				}
-				switch(filepath.Substring(filepath.Length - 3).ToLower())
-				{
-					case "tga":
-						var tga = new TGA(filepath);
-						bmp = (Bitmap)tga;
-						break;
-					case "vtf":
-						throw new NotImplementedException();
-						break;
-					case "dds":
-						throw new NotImplementedException();
-						break;
-					default:
-						bmp = new Bitmap(filepath);
-						break;
-				}
+
+
+				Bitmap bmp = ConvertImage.ConvertImage.fromFile(filepath);
+
+				#region do this later
+				// let's uh
+				// do this later
+				/*
 				Bitmap clonedbitmap = new Bitmap(bmp);
 				Bitmap argbbmp = clonedbitmap.Clone(new Rectangle(0, 0, clonedbitmap.Width, clonedbitmap.Height), PixelFormat.Format32bppArgb);
+
 				if (mode)
 				{
 					var data = argbbmp.LockBits(new Rectangle(0, 0, argbbmp.Width, argbbmp.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -98,53 +92,20 @@ namespace AlphaExeC
 			        }
 					argbbmp.UnlockBits(data);
 				}
-	            var encoder =  Encoder.Quality;
-	            var encoderParameters = new EncoderParameters(1);
-	            var encoderParameter = new EncoderParameter(encoder, quality);
-	            encoderParameters.Param[0] = encoderParameter;
-				switch(outputformat.ToLower())
-				{
-					case "tga":
-						var tga = new TGA(filepath);
-						Bitmap bitmaptga = (Bitmap)tga;
-						break;
-					case "vtf":
-						throw new NotImplementedException();
-						break;
-					case "dds":
-						throw new NotImplementedException();
-						break;
-					case "jpg":
-						ImageCodecInfo imgencoder = GetEncoder(ImageFormat.Jpeg);
-						argbbmp.Save(outputpath, imgencoder, encoderParameters);
-						break;
-					case "png":
-						ImageCodecInfo imgencoder2 = GetEncoder(ImageFormat.Png);
-						argbbmp.Save(outputpath, imgencoder2, encoderParameters);
-						break;
-					case "tiff":
-						ImageCodecInfo imgencoder3 = GetEncoder(ImageFormat.Tiff);
-						argbbmp.Save(outputpath, imgencoder3, encoderParameters);
-						break;
-					case "gif":
-						ImageCodecInfo imgencoder4 = GetEncoder(ImageFormat.Gif);
-						argbbmp.Save(outputpath, imgencoder4, encoderParameters);
-						break;
-					case "bmp":
-						ImageCodecInfo imgencoder5 = GetEncoder(ImageFormat.Bmp);
-						argbbmp.Save(outputpath, imgencoder5, encoderParameters);
-						break;
-					default:
-						throw new NotImplementedException();
-						break;
-				}
-				argbbmp.Dispose();
-				clonedbitmap.Dispose();
-				bmp.Dispose();
+				*/
+				#endregion
+
+				var encoder = Encoder.Quality;
+				var encoderParameters = new EncoderParameters(1);
+				var encoderParameter = new EncoderParameter(encoder, quality);
+				encoderParameters.Param[0] = encoderParameter;
+
+				ConvertImage.ConvertImage.toFile(outputformat, bmp, outputpath, encoderParameters);
+
 			}
-			catch(Exception error)
+			catch (Exception)
 			{
-				
+
 			}
 	    }
 	}

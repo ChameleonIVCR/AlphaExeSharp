@@ -1,10 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Threading;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.Collections.Generic;
 using TGASharpLib;
 
 namespace AlphaExeC {
@@ -44,7 +42,7 @@ namespace AlphaExeC {
                 }
             }
             //Memory overflow from big images, TODO replace with a image size check
-            catch(Exception a) {
+            catch(Exception) {
                 previewBox.Image = null;
             }
         }
@@ -68,12 +66,12 @@ namespace AlphaExeC {
         
         private void inputBrowseClick(object sender, EventArgs e) {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) {
-                inputTextBot.Text = folderBrowserDialog1.SelectedPath;
+                inputTextBox.Text = folderBrowserDialog1.SelectedPath;
             }
         }
         
         void inputAddClick(object sender, EventArgs e) {
-            string path = inputTextBot.Text;
+            string path = inputTextBox.Text;
             if (!String.IsNullOrEmpty(path)  &&  Directory.Exists(path)) {
 
                 int filecount = 0;
@@ -110,14 +108,33 @@ namespace AlphaExeC {
         //Ouput related stuff
         
         void outputBrowseButtonClick(object sender, System.EventArgs e) {
-            //TODO set output folder directly to outputTextBox after selecting folder
-            
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) {
+                outputTextBox.Text = folderBrowserDialog1.SelectedPath;
+            }
         }
 
 		//Toolbar
         
         void convertButtonClick(object sender, EventArgs e) {
-            FuncLibrary.Convert("D:\\example.tga", System.String.Empty, "JPG", true, 100);
+            try {
+                string outputPath;
+                if (writeToInputFolderCheckbox.Checked) {
+                    outputPath = inputTextBox.Text;
+                } else {
+                    outputPath = outputTextBox.Text;
+                }
+                string selectedImagePath = imageList.SelectedItems[0].Text;
+                FuncLibrary.Convert(selectedImagePath, outputPath, outputFormatDropdown.SelectedItem.ToString(), true, 100);
+                //TODO better error handling
+            } catch (ArgumentException) {
+                MessageBox.Show("You need to specify one image", "Error");
+
+            } catch (NullReferenceException) {
+                MessageBox.Show("Specify output.", "Error");
+
+            } catch (Exception error) {
+                MessageBox.Show(error.Message, "Error");
+            }
         }
         
         void clearButtonClick(object sender, EventArgs e) {
