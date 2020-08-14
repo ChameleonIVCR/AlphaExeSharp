@@ -149,15 +149,26 @@ namespace AlphaExeC {
         
         
         void optionsButtonClick(object sender, EventArgs e) {
-            
+		    new Options().ShowDialog();
         }
         
         void helpButtonClick(object sender, System.EventArgs e) {
-            
+            MessageBox.Show("AlphaExeSharp helps you convert images like no other software.\n\n"
+		                    +"How?, we pay special attention to the Alpha channel in your images.\n\n"
+		                    +"Why?, alpha information is often lost and/or mishandled during conversion,\n"
+		                    +"AlphaExeSharp tries to keep the information is a true as posible to the source\n"
+		                    +"going as far as giving the user multiple options to handle their images."
+		                    , "Help");
         }
         
         void aboutButtonClick(object sender, System.EventArgs e) {
-            
+            MessageBox.Show("AlphaExeSharp 13082020\n\n"
+		                    +"https://github.com/ChameleonIVCR/AlphaExeSharp\n\n"
+		                    +"by:\n\n"
+		                    +"Chame\n"
+		                    +"Iamawesome99\n"
+		                    +"Viruz"
+		                    , "About");
         }
         
         void licenseButtonClick(object sender, System.EventArgs e) {
