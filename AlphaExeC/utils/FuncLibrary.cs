@@ -48,22 +48,20 @@ namespace AlphaExeC
 		public static void Convert(string filepath, string output, string outputformat, bool mode, int quality)
 	    {
 			string outputpath = System.String.Empty;
-			try
+
+			if (output == System.String.Empty)
 			{
-
-				if (output == System.String.Empty)
-				{
 					outputpath = Path.GetDirectoryName(filepath) + "\\" + Path.GetFileNameWithoutExtension(filepath) + "_output." + outputformat.ToLower();
-				}
-				else
-				{
+			}
+			else
+			{
 					outputpath = output + "\\" + Path.GetFileNameWithoutExtension(filepath) + "." + outputformat.ToLower();
-				}
+			}
 
 
-				Bitmap bmp = ConvertImage.ConvertImage.fromFile(filepath);
+			Bitmap bmp = ConvertImage.ConvertImage.fromFile(filepath);
 
-				#region do this later
+			#region do this later
 				// let's uh
 				// do this later
 				/*
@@ -95,18 +93,10 @@ namespace AlphaExeC
 				*/
 				#endregion
 
-				var encoder = Encoder.Quality;
-				var encoderParameters = new EncoderParameters(1);
-				var encoderParameter = new EncoderParameter(encoder, quality);
-				encoderParameters.Param[0] = encoderParameter;
+			
 
-				ConvertImage.ConvertImage.toFile(outputformat, bmp, outputpath, encoderParameters);
+			ConvertImage.ConvertImage.toFile(outputformat, bmp, outputpath, quality);
 
-			}
-			catch (Exception)
-			{
-
-			}
 	    }
 	}
 }

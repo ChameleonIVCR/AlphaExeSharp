@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Drawing.Imaging;
 using TGASharpLib;
 using System.Drawing;
 using WebPWrapper;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ConvertImage
 {
@@ -31,28 +34,42 @@ namespace ConvertImage
         public static readonly Dictionary<string, Func<string, Bitmap>> importFunctions = new Dictionary<string, Func<string, Bitmap>>
         {
             {"tga", fromTGA },
-            {"bmp", fromBMP },
-            {"webp", fromWebP }
+            {"bmp", fromGeneric },
+            {"webp", fromWebP },
+            {"jpg", fromGeneric },
+            {"png", fromGeneric },
+            {"gif", fromGeneric },
+            {"tif", fromGeneric },
+            {"tiff", fromGeneric }
         };
         
 
-        // couldn't get this to work
-
-        public static readonly Dictionary<string, Action<Bitmap, string, EncoderParameters>> outputFunctions = new Dictionary<string, Action<Bitmap, string, EncoderParameters>>
+        public static readonly Dictionary<string, Action<Bitmap, string, int>> outputFunctions = new Dictionary<string, Action<Bitmap, string, int>>
         {
-            {"jpg", toJPG },
-            {"png", toPNG },
-            {"tiff", toTIFF },
-            {"gif", toGIF },
-            {"bmp", toBMP}
+            {"jpg", (x, y, z) => toGeneric(x, y, z, ImageFormat.Jpeg) },
+            {"png", (x, y, z) => toGeneric(x, y, z, ImageFormat.Png) },
+            {"tiff", (x, y, z) => toGeneric(x, y, z, ImageFormat.Tiff) },
+            {"gif", (x, y, z) => toGeneric(x, y, z, ImageFormat.Gif) },
+            {"bmp", (x, y, z) => toGeneric(x, y, z, ImageFormat.Bmp) }
         };
 
 
-        #region to bitmap
+        #region from bitmap
 
         public static Bitmap fromFile(string filepath)
         {
-            return importFunctions[filepath.Substring(filepath.Length - 3).ToLower()](filepath);
+
+            string format = Path.GetExtension(filepath).Substring(1).ToLower();
+
+
+            try
+            {
+                return importFunctions[format](filepath);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw new NotImplementedException("Unknown/Unsupported import format: " + format);
+            }
         }
 
         public static Bitmap fromTGA(string filepath)
@@ -60,7 +77,7 @@ namespace ConvertImage
             return (Bitmap) new TGA(filepath);
         }
 
-        public static Bitmap fromBMP(string filepath)
+        public static Bitmap fromGeneric(string filepath)
         {
             return new Bitmap(filepath);
         }
@@ -75,41 +92,35 @@ namespace ConvertImage
 
         #endregion
 
-        #region from bitmap
+        #region to bitmap
         
-        public static void toFile(string outputFormat, Bitmap bmp, string outputPath, EncoderParameters encoderParameters)
+        public static void toFile(string outputFormat, Bitmap bmp, string outputPath, int quality)
         {
-            outputFunctions[outputFormat](bmp, outputPath, encoderParameters);
+            try
+            {
+                outputFunctions[outputFormat.ToLower()](bmp, outputPath, quality);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw new NotImplementedException("Unknown/Unsupported output format: " + outputFormat.ToLower());
+            } 
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
 
-        public static void toJPG(Bitmap bmp, string outputpath, EncoderParameters encoderParameters)
+        public static void toGeneric(Bitmap bmp, string outputpath, int quality, ImageFormat format)
         {
-            ImageCodecInfo imgencoder = GetEncoder(ImageFormat.Jpeg);
-            bmp.Save(outputpath, imgencoder, encoderParameters);
-        }
+            // what is this idk
+            var encoder = Encoder.Quality;
+            var encoderParameters = new EncoderParameters(1);
+            var encoderParameter = new EncoderParameter(encoder, quality);
+            encoderParameters.Param[0] = encoderParameter;
 
-        public static void toPNG(Bitmap bmp, string outputpath, EncoderParameters encoderParameters)
-        {
-            ImageCodecInfo imgencoder = GetEncoder(ImageFormat.Png);
+            ImageCodecInfo imgencoder = GetEncoder(format);
             bmp.Save(outputpath, imgencoder, encoderParameters);
-        }
 
-        public static void toTIFF(Bitmap bmp, string outputpath, EncoderParameters encoderParameters)
-        {
-            ImageCodecInfo imgencoder = GetEncoder(ImageFormat.Tiff);
-            bmp.Save(outputpath, imgencoder, encoderParameters);
-        }
-
-        public static void toGIF(Bitmap bmp, string outputpath, EncoderParameters encoderParameters)
-        {
-            ImageCodecInfo imgencoder = GetEncoder(ImageFormat.Gif);
-            bmp.Save(outputpath, imgencoder, encoderParameters);
-        }
-
-        public static void toBMP(Bitmap bmp, string outputpath, EncoderParameters encoderParameters)
-        {
-            ImageCodecInfo imgencoder = GetEncoder(ImageFormat.Bmp);
-            bmp.Save(outputpath, imgencoder, encoderParameters);
         }
 
         #endregion
