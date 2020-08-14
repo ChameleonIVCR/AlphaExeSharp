@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using TGASharpLib;
 using System.Drawing;
+using WebPWrapper;
 
 namespace ConvertImage
 {
@@ -30,7 +31,8 @@ namespace ConvertImage
         public static readonly Dictionary<string, Func<string, Bitmap>> importFunctions = new Dictionary<string, Func<string, Bitmap>>
         {
             {"tga", fromTGA },
-            {"bmp", fromBMP }
+            {"bmp", fromBMP },
+            {"webp", fromWebP }
         };
         
 
@@ -61,6 +63,14 @@ namespace ConvertImage
         public static Bitmap fromBMP(string filepath)
         {
             return new Bitmap(filepath);
+        }
+
+        public static Bitmap fromWebP(string filepath)
+        {
+            using (WebP webp = new WebP())
+            {
+                return webp.Load(filepath);
+            }              
         }
 
         #endregion
