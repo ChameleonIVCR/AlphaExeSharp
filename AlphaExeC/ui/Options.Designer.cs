@@ -39,14 +39,14 @@ namespace AlphaExeC
             this.qualityBar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dxtCompressionDropdown = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.aDropdown = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.rgbDropdown = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.qualityNumberInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qualityBar)).BeginInit();
@@ -165,7 +165,7 @@ namespace AlphaExeC
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.dxtCompressionDropdown);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.aDropdown);
             this.groupBox2.Controls.Add(this.label4);
@@ -179,13 +179,37 @@ namespace AlphaExeC
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "DXT";
             // 
+            // dxtCompressionDropdown
+            // 
+            this.dxtCompressionDropdown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dxtCompressionDropdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dxtCompressionDropdown.FormattingEnabled = true;
+            this.dxtCompressionDropdown.Items.AddRange(new object[] {
+                                    "Optimal -- DEFAULT",
+                                    "Low",
+                                    "Medium",
+                                    "High"});
+            this.dxtCompressionDropdown.Location = new System.Drawing.Point(116, 83);
+            this.dxtCompressionDropdown.Name = "dxtCompressionDropdown";
+            this.dxtCompressionDropdown.Size = new System.Drawing.Size(202, 21);
+            this.dxtCompressionDropdown.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 86);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 23);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "DXT Compression";
+            // 
             // aDropdown
             // 
             this.aDropdown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.aDropdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aDropdown.FormattingEnabled = true;
             this.aDropdown.Items.AddRange(new object[] {
-                                    "BGRA-- DEFAULT",
+                                    "BGRA -- DEFAULT",
                                     "DXT5",
                                     "DXT3",
                                     "DXT1",
@@ -248,30 +272,6 @@ namespace AlphaExeC
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 86);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 23);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "DXT Compression";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-                                    "Optimal -- DEFAULT",
-                                    "Low",
-                                    "Medium",
-                                    "High"});
-            this.comboBox1.Location = new System.Drawing.Point(116, 83);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(202, 21);
-            this.comboBox1.TabIndex = 11;
-            // 
             // Options
             // 
             this.AcceptButton = this.saveButton;
@@ -295,7 +295,7 @@ namespace AlphaExeC
             this.ResumeLayout(false);
         }
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox dxtCompressionDropdown;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox rgbDropdown;
         private System.Windows.Forms.Label label4;

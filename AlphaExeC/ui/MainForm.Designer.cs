@@ -52,24 +52,19 @@ namespace AlphaExeC
 		    this.inputBrowseButton = new System.Windows.Forms.Button();
 		    this.label3 = new System.Windows.Forms.Label();
 		    this.inputTextBox = new System.Windows.Forms.TextBox();
-		    this.allowMoreFormatsCheckbox = new System.Windows.Forms.CheckBox();
 		    this.inputFormatDropdown = new System.Windows.Forms.ComboBox();
 		    this.label4 = new System.Windows.Forms.Label();
 		    this.outputgroupBox2 = new System.Windows.Forms.GroupBox();
 		    this.outputsplitContainer = new System.Windows.Forms.SplitContainer();
-		    this.writeToInputFolderCheckbox = new System.Windows.Forms.CheckBox();
 		    this.outputBrowseButton = new System.Windows.Forms.Button();
 		    this.label1 = new System.Windows.Forms.Label();
 		    this.outputTextBox = new System.Windows.Forms.TextBox();
-		    this.onlyAlphaChCheckbox = new System.Windows.Forms.CheckBox();
 		    this.outputFormatDropdown = new System.Windows.Forms.ComboBox();
 		    this.label2 = new System.Windows.Forms.Label();
 		    this.progressBar1 = new System.Windows.Forms.ProgressBar();
 		    this.imageList = new System.Windows.Forms.ListView();
 		    this.file = new System.Windows.Forms.ColumnHeader();
-		    this.statusTextBox = new System.Windows.Forms.RichTextBox();
 		    this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-		    this.previewBox = new System.Windows.Forms.PictureBox();
 		    this.panel1.SuspendLayout();
 		    ((System.ComponentModel.ISupportInitialize)(this.topsplitContainer1)).BeginInit();
 		    this.topsplitContainer1.Panel1.SuspendLayout();
@@ -85,7 +80,6 @@ namespace AlphaExeC
 		    this.outputsplitContainer.Panel1.SuspendLayout();
 		    this.outputsplitContainer.Panel2.SuspendLayout();
 		    this.outputsplitContainer.SuspendLayout();
-		    ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
 		    this.SuspendLayout();
 		    // 
 		    // panel1
@@ -232,7 +226,6 @@ namespace AlphaExeC
 		    // 
 		    // inputsplitContainer.Panel2
 		    // 
-		    this.inputsplitContainer.Panel2.Controls.Add(this.allowMoreFormatsCheckbox);
 		    this.inputsplitContainer.Panel2.Controls.Add(this.inputFormatDropdown);
 		    this.inputsplitContainer.Panel2.Controls.Add(this.label4);
 		    this.inputsplitContainer.Size = new System.Drawing.Size(530, 76);
@@ -279,16 +272,6 @@ namespace AlphaExeC
 		    this.inputTextBox.Size = new System.Drawing.Size(241, 20);
 		    this.inputTextBox.TabIndex = 4;
 		    // 
-		    // allowMoreFormatsCheckbox
-		    // 
-		    this.allowMoreFormatsCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-		    this.allowMoreFormatsCheckbox.Location = new System.Drawing.Point(395, 7);
-		    this.allowMoreFormatsCheckbox.Name = "allowMoreFormatsCheckbox";
-		    this.allowMoreFormatsCheckbox.Size = new System.Drawing.Size(135, 24);
-		    this.allowMoreFormatsCheckbox.TabIndex = 8;
-		    this.allowMoreFormatsCheckbox.Text = "Allow multiple formats";
-		    this.allowMoreFormatsCheckbox.UseVisualStyleBackColor = true;
-		    // 
 		    // inputFormatDropdown
 		    // 
 		    this.inputFormatDropdown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -296,15 +279,19 @@ namespace AlphaExeC
 		    this.inputFormatDropdown.FormattingEnabled = true;
 		    this.inputFormatDropdown.Items.AddRange(new object[] {
 		    		    		    "PNG",
+		    		    		    "BMP",
+		    		    		    "DDS",
+		    		    		    "EMF",
+		    		    		    "GIF",
+		    		    		    "JPG",
+		    		    		    "SGI",
 		    		    		    "TGA",
 		    		    		    "TIFF",
 		    		    		    "VTF",
-		    		    		    "DDS",
-		    		    		    "WebP",
-		    		    		    "SGI"});
+		    		    		    "WebP"});
 		    this.inputFormatDropdown.Location = new System.Drawing.Point(100, 8);
 		    this.inputFormatDropdown.Name = "inputFormatDropdown";
-		    this.inputFormatDropdown.Size = new System.Drawing.Size(277, 21);
+		    this.inputFormatDropdown.Size = new System.Drawing.Size(415, 21);
 		    this.inputFormatDropdown.TabIndex = 6;
 		    // 
 		    // label4
@@ -324,7 +311,7 @@ namespace AlphaExeC
 		    this.outputgroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 		    this.outputgroupBox2.Location = new System.Drawing.Point(4, 3);
 		    this.outputgroupBox2.Name = "outputgroupBox2";
-		    this.outputgroupBox2.Size = new System.Drawing.Size(628, 95);
+		    this.outputgroupBox2.Size = new System.Drawing.Size(643, 95);
 		    this.outputgroupBox2.TabIndex = 1;
 		    this.outputgroupBox2.TabStop = false;
 		    this.outputgroupBox2.Text = "Output";
@@ -340,35 +327,23 @@ namespace AlphaExeC
 		    // 
 		    // outputsplitContainer.Panel1
 		    // 
-		    this.outputsplitContainer.Panel1.Controls.Add(this.writeToInputFolderCheckbox);
 		    this.outputsplitContainer.Panel1.Controls.Add(this.outputBrowseButton);
 		    this.outputsplitContainer.Panel1.Controls.Add(this.label1);
 		    this.outputsplitContainer.Panel1.Controls.Add(this.outputTextBox);
 		    // 
 		    // outputsplitContainer.Panel2
 		    // 
-		    this.outputsplitContainer.Panel2.Controls.Add(this.onlyAlphaChCheckbox);
 		    this.outputsplitContainer.Panel2.Controls.Add(this.outputFormatDropdown);
 		    this.outputsplitContainer.Panel2.Controls.Add(this.label2);
-		    this.outputsplitContainer.Size = new System.Drawing.Size(600, 76);
+		    this.outputsplitContainer.Size = new System.Drawing.Size(615, 76);
 		    this.outputsplitContainer.SplitterDistance = 37;
 		    this.outputsplitContainer.SplitterWidth = 1;
 		    this.outputsplitContainer.TabIndex = 0;
 		    // 
-		    // writeToInputFolderCheckbox
-		    // 
-		    this.writeToInputFolderCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-		    this.writeToInputFolderCheckbox.Location = new System.Drawing.Point(393, 6);
-		    this.writeToInputFolderCheckbox.Name = "writeToInputFolderCheckbox";
-		    this.writeToInputFolderCheckbox.Size = new System.Drawing.Size(140, 24);
-		    this.writeToInputFolderCheckbox.TabIndex = 3;
-		    this.writeToInputFolderCheckbox.Text = "Write to input folder";
-		    this.writeToInputFolderCheckbox.UseVisualStyleBackColor = true;
-		    // 
 		    // outputBrowseButton
 		    // 
 		    this.outputBrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-		    this.outputBrowseButton.Location = new System.Drawing.Point(345, 7);
+		    this.outputBrowseButton.Location = new System.Drawing.Point(503, 7);
 		    this.outputBrowseButton.Name = "outputBrowseButton";
 		    this.outputBrowseButton.Size = new System.Drawing.Size(30, 21);
 		    this.outputBrowseButton.TabIndex = 2;
@@ -390,18 +365,8 @@ namespace AlphaExeC
 		    this.outputTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 		    this.outputTextBox.Location = new System.Drawing.Point(98, 7);
 		    this.outputTextBox.Name = "outputTextBox";
-		    this.outputTextBox.Size = new System.Drawing.Size(241, 20);
+		    this.outputTextBox.Size = new System.Drawing.Size(399, 20);
 		    this.outputTextBox.TabIndex = 0;
-		    // 
-		    // onlyAlphaChCheckbox
-		    // 
-		    this.onlyAlphaChCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-		    this.onlyAlphaChCheckbox.Location = new System.Drawing.Point(393, 5);
-		    this.onlyAlphaChCheckbox.Name = "onlyAlphaChCheckbox";
-		    this.onlyAlphaChCheckbox.Size = new System.Drawing.Size(140, 24);
-		    this.onlyAlphaChCheckbox.TabIndex = 5;
-		    this.onlyAlphaChCheckbox.Text = "Only alpha channel";
-		    this.onlyAlphaChCheckbox.UseVisualStyleBackColor = true;
 		    // 
 		    // outputFormatDropdown
 		    // 
@@ -410,18 +375,19 @@ namespace AlphaExeC
 		    this.outputFormatDropdown.FormattingEnabled = true;
 		    this.outputFormatDropdown.Items.AddRange(new object[] {
 		    		    		    "TGA",
-		    		    		    "PNG",
-		    		    		    "TIFF",
+		    		    		    "BMP",
+		    		    		    "DDS",
+		    		    		    "EMF",
 		    		    		    "GIF",
 		    		    		    "JPG",
-		    		    		    "BMP",
+		    		    		    "PNG",
+		    		    		    "TIFF",
 		    		    		    "VTF",
-		    		    		    "DDS",
-		    		    		    "WFM",
-		    		    		    "EMF"});
+		    		    		    "WebP",
+		    		    		    "WFM"});
 		    this.outputFormatDropdown.Location = new System.Drawing.Point(98, 6);
 		    this.outputFormatDropdown.Name = "outputFormatDropdown";
-		    this.outputFormatDropdown.Size = new System.Drawing.Size(277, 21);
+		    this.outputFormatDropdown.Size = new System.Drawing.Size(435, 21);
 		    this.outputFormatDropdown.TabIndex = 2;
 		    // 
 		    // label2
@@ -453,7 +419,7 @@ namespace AlphaExeC
 		    this.imageList.Location = new System.Drawing.Point(12, 157);
 		    this.imageList.MultiSelect = false;
 		    this.imageList.Name = "imageList";
-		    this.imageList.Size = new System.Drawing.Size(1120, 326);
+		    this.imageList.Size = new System.Drawing.Size(1120, 467);
 		    this.imageList.TabIndex = 8;
 		    this.imageList.UseCompatibleStateImageBehavior = false;
 		    this.imageList.SelectedIndexChanged += new System.EventHandler(this.imageListSelectedIndexChange);
@@ -463,37 +429,15 @@ namespace AlphaExeC
 		    this.file.Text = "File";
 		    this.file.Width = 1102;
 		    // 
-		    // statusTextBox
-		    // 
-		    this.statusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
-		    this.statusTextBox.Font = new System.Drawing.Font("DejaVu Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-		    this.statusTextBox.Location = new System.Drawing.Point(153, 489);
-		    this.statusTextBox.Name = "statusTextBox";
-		    this.statusTextBox.ReadOnly = true;
-		    this.statusTextBox.Size = new System.Drawing.Size(980, 135);
-		    this.statusTextBox.TabIndex = 9;
-		    this.statusTextBox.Text = "Waiting...";
-		    // 
 		    // folderBrowserDialog1
 		    // 
 		    this.folderBrowserDialog1.Description = "Select an input folder to import images from.";
-		    // 
-		    // previewBox
-		    // 
-		    this.previewBox.Location = new System.Drawing.Point(12, 489);
-		    this.previewBox.Name = "previewBox";
-		    this.previewBox.Size = new System.Drawing.Size(135, 135);
-		    this.previewBox.TabIndex = 10;
-		    this.previewBox.TabStop = false;
 		    // 
 		    // MainForm
 		    // 
 		    this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 		    this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 		    this.ClientSize = new System.Drawing.Size(1145, 665);
-		    this.Controls.Add(this.previewBox);
-		    this.Controls.Add(this.statusTextBox);
 		    this.Controls.Add(this.imageList);
 		    this.Controls.Add(this.progressBar1);
 		    this.Controls.Add(this.panel1);
@@ -519,27 +463,21 @@ namespace AlphaExeC
 		    this.outputsplitContainer.Panel2.ResumeLayout(false);
 		    ((System.ComponentModel.ISupportInitialize)(this.outputsplitContainer)).EndInit();
 		    this.outputsplitContainer.ResumeLayout(false);
-		    ((System.ComponentModel.ISupportInitialize)(this.previewBox)).EndInit();
 		    this.ResumeLayout(false);
 		}
-		private System.Windows.Forms.PictureBox previewBox;
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 		private System.Windows.Forms.ColumnHeader file;
 		private System.Windows.Forms.ListView imageList;
-		private System.Windows.Forms.RichTextBox statusTextBox;
 		private System.Windows.Forms.ProgressBar progressBar1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox outputFormatDropdown;
-		private System.Windows.Forms.CheckBox onlyAlphaChCheckbox;
 		private System.Windows.Forms.TextBox outputTextBox;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button outputBrowseButton;
-		private System.Windows.Forms.CheckBox writeToInputFolderCheckbox;
 		private System.Windows.Forms.SplitContainer outputsplitContainer;
 		private System.Windows.Forms.GroupBox outputgroupBox2;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.ComboBox inputFormatDropdown;
-		private System.Windows.Forms.CheckBox allowMoreFormatsCheckbox;
 		private System.Windows.Forms.TextBox inputTextBox;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Button inputBrowseButton;

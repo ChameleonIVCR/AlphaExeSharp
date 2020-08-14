@@ -9,6 +9,11 @@ namespace AlphaExeC {
             InitializeComponent();
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            //remove after configuration is implemented
+            pixelFormatDropdown.SelectedIndex = 0;
+            rgbDropdown.SelectedIndex = 0;
+            aDropdown.SelectedIndex = 0;
+            dxtCompressionDropdown.SelectedIndex = 0;
         }
         
         private void qualityNumberInputChanged(object sender, EventArgs e) {
