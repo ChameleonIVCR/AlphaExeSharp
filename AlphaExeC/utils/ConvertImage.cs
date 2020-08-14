@@ -40,7 +40,8 @@ namespace ConvertImage
             {"png", fromGeneric },
             {"gif", fromGeneric },
             {"tif", fromGeneric },
-            {"tiff", fromGeneric }
+            {"tiff", fromGeneric },
+            {"emf", fromEMF }
         };
         
 
@@ -50,7 +51,8 @@ namespace ConvertImage
             {"png", (x, y, z) => toGeneric(x, y, z, ImageFormat.Png) },
             {"tiff", (x, y, z) => toGeneric(x, y, z, ImageFormat.Tiff) },
             {"gif", (x, y, z) => toGeneric(x, y, z, ImageFormat.Gif) },
-            {"bmp", (x, y, z) => toGeneric(x, y, z, ImageFormat.Bmp) }
+            {"bmp", (x, y, z) => toGeneric(x, y, z, ImageFormat.Bmp) },
+            {"webp", toWebP }
         };
 
 
@@ -90,6 +92,21 @@ namespace ConvertImage
             }              
         }
 
+        public static Bitmap fromEMF(string filepath)
+        {
+
+            int width = 1024;
+            int height = 1024;
+
+            var source = new Metafile(filepath);
+            var target = new Bitmap(width, height);
+            using (var g = Graphics.FromImage(target))
+            {
+                g.DrawImage(source, 0, 0, width, height);
+                return target;
+            }
+        }
+
         #endregion
 
         #region to bitmap
@@ -121,6 +138,14 @@ namespace ConvertImage
             ImageCodecInfo imgencoder = GetEncoder(format);
             bmp.Save(outputpath, imgencoder, encoderParameters);
 
+        }
+
+        public static void toWebP(Bitmap bmp, string outputpath, int quality)
+        {
+            using (WebP webp = new WebP())
+            {
+                webp.Save(bmp, outputpath, quality);
+            }
         }
 
         #endregion
