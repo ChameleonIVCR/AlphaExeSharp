@@ -15,46 +15,11 @@ namespace AlphaExeC {
             outputFormatDropdown.SelectedIndex = 0;
         }
         
-        //Write to the statusTextBox
-//        public void WritetoStatus(string status) {
-//            statusTextBox.SelectionStart = 0;
-//            statusTextBox.SelectionLength = 0;
-//            statusTextBox.SelectedText = status;
-//        }
-
-        //Make a thumbnail and set it as preview
-//        public void getThumbnail(string path) {
-//            try {
-//                //TGA images need special loading using TGASharpLib
-//                if (path.ToLower().EndsWith(".tga")) {
-//                    var tga = new TGA(path);
-//                    var bitmap = (Bitmap)tga;
-//                    previewBox.Image = bitmap
-//                        .GetThumbnailImage(135, 135, ()=>false, IntPtr.Zero);
-//
-//                    //Queue to the garbage collector
-//                    bitmap.Dispose();
-//                }
-//                else {
-//                    Image src = Image.FromFile(path);
-//                    previewBox.Image = src
-//                        .GetThumbnailImage(135, 135, ()=>false, IntPtr.Zero);
-//
-//                    src.Dispose();
-//                }
-//            }
-//            //Memory overflow from big images, TODO replace with a image size check
-//            catch(Exception) {
-//                previewBox.Image = null;
-//            }
-//        }
-        
         //Called when the selected item changes in the list
         private void imageListSelectedIndexChange(object sender, EventArgs e) {
 
 //            string path = System.String.Empty;
 //
-//            //TODO replace with a 0 index selection
 //            foreach (ListViewItem item in imageList.SelectedItems) {
 //                path = item.Text;
 //            }
@@ -66,7 +31,7 @@ namespace AlphaExeC {
         
         //Input related stuff
         
-        private void inputBrowseClick(object sender, EventArgs e) {
+        void inputBrowseClick(object sender, EventArgs e) {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) {
                 inputTextBox.Text = folderBrowserDialog1.SelectedPath;
             }
@@ -76,7 +41,6 @@ namespace AlphaExeC {
             string path = inputTextBox.Text;
             if (!String.IsNullOrEmpty(path)  &&  Directory.Exists(path)) {
 
-                int filecount = 0;
                 string[] filestoadd = Directory.GetFiles(path); 
                 string[] formats = new string[inputFormatDropdown.Items.Count];
                 //TODO get this from configuration
@@ -95,8 +59,7 @@ namespace AlphaExeC {
                             && imageList.FindItemWithText(itemlower) == null) {
                             
                             imageList.Items.Add(item);
-                            filecount++;
-                            }
+                        }
                     }
                 }
 //                WritetoStatus(filecount.ToString()+" files added.\n");

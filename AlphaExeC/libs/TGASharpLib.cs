@@ -21,8 +21,6 @@ SOFTWARE.
 */
 
 using System;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
@@ -908,6 +906,7 @@ namespace TGASharpLib
         _UnAssigned_255
     }
     #endregion
+
     #region Classes
     public class TgaColorKey : ICloneable
     {
@@ -942,9 +941,9 @@ namespace TGASharpLib
         public TgaColorKey(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be equal " + Size + "!");
 
             Color color = Color.FromArgb(BitConverter.ToInt32(Bytes, 0));
             a = color.A;
@@ -1075,7 +1074,7 @@ namespace TGASharpLib
         public override string ToString()
         {
             return String.Format("{0}={1}, {2}={3}, {4}={5}, {6}={7}",
-                "A", a, "R", r, "G", g, "B", b);
+                nameof(A), a, nameof(R), r, nameof(G), g, nameof(B), b);
         }
 
         /// <summary>
@@ -1131,9 +1130,9 @@ namespace TGASharpLib
         public TgaColorMapSpec(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be equal " + Size + "!");
 
             firstEntryIndex = BitConverter.ToUInt16(Bytes, 0);
             colorMapLength = BitConverter.ToUInt16(Bytes, 2);
@@ -1247,8 +1246,8 @@ namespace TGASharpLib
 
         public override string ToString()
         {
-            return String.Format("{0}={1}, {2}={3}, {4}={5}", "FirstEntryIndex", FirstEntryIndex,
-                "ColorMapLength", ColorMapLength, "ColorMapEntrySize", ColorMapEntrySize);
+            return String.Format("{0}={1}, {2}={3}, {4}={5}", nameof(FirstEntryIndex), FirstEntryIndex,
+                nameof(ColorMapLength), ColorMapLength, nameof(ColorMapEntrySize), ColorMapEntrySize);
         }
 
         /// <summary>
@@ -1274,7 +1273,7 @@ namespace TGASharpLib
         public TgaComment(string Str, char BlankSpaceChar = '\0')
         {
             if (Str == null)
-                throw new ArgumentNullException("Str" + " = null!");
+                throw new ArgumentNullException(nameof(Str) + " = null!");
 
             origString = Str;
             blankSpaceChar = BlankSpaceChar;
@@ -1283,9 +1282,9 @@ namespace TGASharpLib
         public TgaComment(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be equal " + Size + "!");
 
             string s = Encoding.ASCII.GetString(Bytes, 0, StrNLen);
             s += Encoding.ASCII.GetString(Bytes, 81, StrNLen);
@@ -1482,9 +1481,9 @@ namespace TGASharpLib
         public TgaDateTime(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             else if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes) + " must be equal " + Size + "!");
 
             month = BitConverter.ToUInt16(Bytes, 0);
             day = BitConverter.ToUInt16(Bytes, 2);
@@ -1692,9 +1691,9 @@ namespace TGASharpLib
         public TgaDevEntry(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             else if (Bytes.Length < 6)
-                throw new ArgumentOutOfRangeException("Bytes" + " must be >= 6!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes) + " must be >= 6!");
 
             fieldTag = BitConverter.ToUInt16(Bytes, 0);
             fieldFileOffset = BitConverter.ToUInt32(Bytes, 2);
@@ -1825,8 +1824,8 @@ namespace TGASharpLib
         /// <returns>String in "Tag={0}, Offset={1}, FieldSize={2}" format.</returns>
         public override string ToString()
         {
-            return String.Format("{0}={1}, {1}={2}, {3}={4}", "Tag", fieldTag,
-                "Offset", fieldFileOffset, "FieldSize", FieldSize);
+            return String.Format("{0}={1}, {1}={2}, {3}={4}", nameof(Tag), fieldTag,
+                nameof(Offset), fieldFileOffset, nameof(FieldSize), FieldSize);
         }
 
         /// <summary>
@@ -1862,9 +1861,9 @@ namespace TGASharpLib
         public TgaFraction(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be equal " + Size + "!");
 
             numerator = BitConverter.ToUInt16(Bytes, 0);
             denominator = BitConverter.ToUInt16(Bytes, 2);
@@ -1972,8 +1971,8 @@ namespace TGASharpLib
         /// <returns>String in "Numerator=1, Denominator=2" format.</returns>
         public override string ToString()
         {
-            return String.Format("{0}={1}, {2}={3}", "Numerator", numerator,
-                "Denominator", denominator);
+            return String.Format("{0}={1}, {2}={3}", nameof(Numerator), numerator,
+                nameof(Denominator), denominator);
         }
 
         /// <summary>
@@ -2089,8 +2088,8 @@ namespace TGASharpLib
 
         public override string ToString()
         {
-            return String.Format("{0}={1}, {2}={3}, ImageDescriptor_AsByte={4}", "ImageOrigin",
-                imageOrigin, "AlphaChannelBits", alphaChannelBits, ToByte());
+            return String.Format("{0}={1}, {2}={3}, ImageDescriptor_AsByte={4}", nameof(ImageOrigin),
+                imageOrigin, nameof(AlphaChannelBits), alphaChannelBits, ToByte());
         }
 
         /// <summary>
@@ -2156,9 +2155,9 @@ namespace TGASharpLib
         public TgaImageSpec(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be equal " + Size + "!");
 
             x_Origin = BitConverter.ToUInt16(Bytes, 0);
             y_Origin = BitConverter.ToUInt16(Bytes, 2);
@@ -2303,12 +2302,12 @@ namespace TGASharpLib
         public override string ToString()
         {
             return String.Format("{0}={1}, {2}={3}, {4}={5}, {6}={7}, {8}={9}, {10}={11}",
-                "X_Origin", x_Origin,
-                "Y_Origin", y_Origin,
-                "ImageWidth", imageWidth,
-                "ImageHeight", imageHeight,
-                "PixelDepth", pixelDepth,
-                "ImageDescriptor", imageDescriptor);
+                nameof(X_Origin), x_Origin,
+                nameof(Y_Origin), y_Origin,
+                nameof(ImageWidth), imageWidth,
+                nameof(ImageHeight), imageHeight,
+                nameof(PixelDepth), pixelDepth,
+                nameof(ImageDescriptor), imageDescriptor);
         }
 
         /// <summary>
@@ -2343,9 +2342,9 @@ namespace TGASharpLib
         public TgaPostageStampImage(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length < 2)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be >= " + 2 + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be >= " + 2 + "!");
 
             width = Bytes[0];
             height = Bytes[1];
@@ -2363,7 +2362,7 @@ namespace TGASharpLib
         public TgaPostageStampImage(byte Width, byte Height, byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
 
             width = Width;
             height = Height;
@@ -2458,7 +2457,7 @@ namespace TGASharpLib
         public override string ToString()
         {
             return String.Format("{0}={1}, {2}={3}, DataLength={4}",
-                "Width", width, "Height", height, (data == null ? -1 : data.Length));
+                nameof(Width), width, nameof(Height), height, (data == null ? -1 : data.Length));
         }
 
         /// <summary>
@@ -2492,7 +2491,7 @@ namespace TGASharpLib
             if (Str == null)
                 throw new ArgumentNullException();
             if (Str.Length < 3 || Str.Length > 4)
-                throw new ArgumentOutOfRangeException("Str.Length" + " must be equal 3 or 4!");
+                throw new ArgumentOutOfRangeException(nameof(Str.Length) + " must be equal 3 or 4!");
 
             bool Res = ushort.TryParse(Str.Substring(0, 3), out versionNumber);
             if (Res && Str.Length == 4)
@@ -2506,9 +2505,9 @@ namespace TGASharpLib
         public TgaSoftVersion(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be equal " + Size + "!");
 
             versionNumber = BitConverter.ToUInt16(Bytes, 0);
             versionLetter = Encoding.ASCII.GetString(Bytes, 2, 1)[0];
@@ -2634,7 +2633,7 @@ namespace TGASharpLib
         public TgaString(byte[] Bytes, bool UseEnding = false)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
 
             length = Bytes.Length;
             useEnding = UseEnding;
@@ -2663,7 +2662,7 @@ namespace TGASharpLib
         public TgaString(string Str, int Length, bool UseEnding = false, char BlankSpaceChar = '\0')
         {
             if (Str == null)
-                throw new ArgumentNullException("Str" + " = null!");
+                throw new ArgumentNullException(nameof(Str) + " = null!");
 
             origString = Str;
             length = Length;
@@ -2894,9 +2893,9 @@ namespace TGASharpLib
         public TgaTime(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             else if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes) + " must be equal " + Size + "!");
 
             hours = BitConverter.ToUInt16(Bytes, 0);
             minutes = BitConverter.ToUInt16(Bytes, 2);
@@ -3045,9 +3044,9 @@ namespace TGASharpLib
         public TgaHeader(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be equal " + Size + "!");
 
             idLength = Bytes[0];
             colorMapType = (TgaColorMapType)Bytes[1];
@@ -3188,11 +3187,11 @@ namespace TGASharpLib
         public override string ToString()
         {
             return String.Format("{0}={1}, {2}={3}, {4}={5}, {6}={7}, {8}={9}",
-                "IDLength", idLength,
-                "ColorMapType", colorMapType,
-                "ImageType", imageType,
-                "ColorMapSpec", colorMapSpec,
-                "ImageSpec", imageSpec);
+                nameof(IDLength), idLength,
+                nameof(ColorMapType), colorMapType,
+                nameof(ImageType), imageType,
+                nameof(ColorMapSpec), colorMapSpec,
+                nameof(ImageSpec), imageSpec);
         }
 
         /// <summary>
@@ -3376,7 +3375,7 @@ namespace TGASharpLib
         public TgaDevArea(List<TgaDevEntry> Entries)
         {
             if (Entries == null)
-                throw new ArgumentNullException("Entries" + " = null!");
+                throw new ArgumentNullException(nameof(Entries) + " = null!");
 
             entries = Entries;
         }
@@ -3472,7 +3471,7 @@ namespace TGASharpLib
         public byte[] ToBytes()
         {
             if (entries == null)
-                throw new Exception("Entries" + " = null!");
+                throw new Exception(nameof(Entries) + " = null!");
 
             ushort NumberOfEntries = (ushort)Math.Min(ushort.MaxValue, entries.Count);
             List<byte> DevDir = new List<byte>(BitConverter.GetBytes(NumberOfEntries));
@@ -3531,9 +3530,9 @@ namespace TGASharpLib
         public TgaExtArea(byte[] Bytes, uint[] SLT = null, TgaPostageStampImage PostImg = null, ushort[] CCT = null)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length < MinSize)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be >= " + MinSize + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be >= " + MinSize + "!");
 
             extensionSize = BitConverter.ToUInt16(Bytes, 0);
             authorName = new TgaString(BitConverterExt.GetElements(Bytes, 2, 41), true);
@@ -4113,9 +4112,9 @@ namespace TGASharpLib
         public TgaFooter(byte[] Bytes)
         {
             if (Bytes == null)
-                throw new ArgumentNullException("Bytes" + " = null!");
+                throw new ArgumentNullException(nameof(Bytes) + " = null!");
             if (Bytes.Length != Size)
-                throw new ArgumentOutOfRangeException("Bytes.Length" + " must be equal " + Size + "!");
+                throw new ArgumentOutOfRangeException(nameof(Bytes.Length) + " must be equal " + Size + "!");
 
             extAreaOffset = BitConverter.ToUInt32(Bytes, 0);
             devDirOffset = BitConverter.ToUInt32(Bytes, 4);
@@ -4263,7 +4262,7 @@ namespace TGASharpLib
         public override string ToString()
         {
             return String.Format("{0}={1}, {2}={3}, FullSignature={4}",
-                "ExtensionAreaOffset", extAreaOffset, "DeveloperDirectoryOffset", devDirOffset,
+                nameof(ExtensionAreaOffset), extAreaOffset, nameof(DeveloperDirectoryOffset), devDirOffset,
                 (signature + reservedChar + zeroStrTerminator).ToString());
         }
 
@@ -4342,13 +4341,13 @@ namespace TGASharpLib
         public static T[] GetElements<T>(T[] SrcArray, int Offset, int Count)
         {
             if (SrcArray == null)
-                throw new ArgumentNullException("SrcArray" + " is null!");
+                throw new ArgumentNullException(nameof(SrcArray) + " is null!");
 
             if (Offset >= SrcArray.Length || Offset < 0)
-                throw new ArgumentOutOfRangeException("Offset" + " has wrong value!");
+                throw new ArgumentOutOfRangeException(nameof(Offset) + " has wrong value!");
 
             if (Count <= 0 || Offset + Count > SrcArray.Length)
-                throw new ArgumentOutOfRangeException("Count" + " has wrong value!");
+                throw new ArgumentOutOfRangeException(nameof(Count) + " has wrong value!");
 
             T[] Buff = new T[Count];
             Array.Copy(SrcArray, Offset, Buff, 0, Buff.Length);
@@ -4416,16 +4415,16 @@ namespace TGASharpLib
         public static bool IsElementsEqual<T>(T[] Arr, int Offset1, int Offset2, int Count)
         {
             if (Arr == null)
-                throw new ArgumentNullException("Arr" + " is null!");
+                throw new ArgumentNullException(nameof(Arr) + " is null!");
 
             if (Offset1 >= Arr.Length || Offset1 < 0)
-                throw new ArgumentOutOfRangeException("Offset1" + " has wrong value!");
+                throw new ArgumentOutOfRangeException(nameof(Offset1) + " has wrong value!");
 
             if (Offset2 >= Arr.Length || Offset2 < 0)
-                throw new ArgumentOutOfRangeException("Offset2" + " has wrong value!");
+                throw new ArgumentOutOfRangeException(nameof(Offset2) + " has wrong value!");
 
             if (Count <= 0 || Offset1 + Count > Arr.Length || Offset2 + Count > Arr.Length)
-                throw new ArgumentOutOfRangeException("Count" + " has wrong value!");
+                throw new ArgumentOutOfRangeException(nameof(Count) + " has wrong value!");
 
             if (Offset1 == Offset2)
                 return true;
@@ -5319,7 +5318,7 @@ namespace TGASharpLib
                     case PixelFormat.Canonical:
                     case PixelFormat.Format16bppRgb565:
                     default:
-                        throw new FormatException("PixelFormat" + " is not supported!");
+                        throw new FormatException(nameof(PixelFormat) + " is not supported!");
 
                     case PixelFormat.Format1bppIndexed:
                     case PixelFormat.Format4bppIndexed:
@@ -5610,10 +5609,10 @@ namespace TGASharpLib
         byte[] RLE_Encode(byte[] ImageData, int Width, int Height)
         {
             if (ImageData == null)
-                throw new ArgumentNullException("ImageData" + "in null!");
+                throw new ArgumentNullException(nameof(ImageData) + "in null!");
 
             if (Width <= 0 || Height <= 0)
-                throw new ArgumentOutOfRangeException("Width" + " and " + "Height" + " must be > 0!");
+                throw new ArgumentOutOfRangeException(nameof(Width) + " and " + nameof(Height) + " must be > 0!");
 
             int Bpp = ImageData.Length / Width / Height; // Bytes per pixel
             int ScanLineSize = Width * Bpp;
@@ -5732,18 +5731,13 @@ namespace TGASharpLib
                         if (UseAlpha)
                         {
                             var f = Footer;
-                            TGASharpLib.TgaAttrType AttrtypeVar = ExtArea.AttributesType; //FIXME
-                            //var AttrtypeVar = (ExtArea != null) ? ExtArea.AttributesType : null;
-                            if (AttrtypeVar == TgaAttrType.PreMultipliedAlpha)
-                            //if (ExtArea?.AttributesType == TgaAttrType.PreMultipliedAlpha);
+                            if (ExtArea?.AttributesType == TgaAttrType.PreMultipliedAlpha)
                                 PixFormat = PixelFormat.Format32bppPArgb;
                             else
                                 PixFormat = PixelFormat.Format32bppArgb;
                         }
                         else
-                       	{
                             PixFormat = PixelFormat.Format32bppRgb;
-                        }
                         break;
 
                     default:
@@ -5900,19 +5894,29 @@ namespace TGASharpLib
         /// </summary>
         /// <param name="ForceUseAlpha">Force use alpha channel.</param>
         /// <returns>Bitmap or null.</returns>
-        public Bitmap GetPostageStampImage(bool ForceUseAlpha = false)
-        {
+        /// 
+        
+        public Bitmap GetThumbnail(bool ForceUseAlpha = false){
             if (ExtArea == null || ExtArea.PostageStampImage == null || ExtArea.PostageStampImage.Data == null ||
                 ExtArea.PostageStampImage.Width <= 0 || ExtArea.PostageStampImage.Height <= 0)
-                return null;
-
+                UpdatePostageStampImage();
+            
             return ToBitmapFunc(ForceUseAlpha, true);
         }
+        
+//        private Bitmap GetPostageStampImage(bool ForceUseAlpha = false)
+//        {
+//            if (ExtArea == null || ExtArea.PostageStampImage == null || ExtArea.PostageStampImage.Data == null ||
+//                ExtArea.PostageStampImage.Width <= 0 || ExtArea.PostageStampImage.Height <= 0)
+//                return null;
+//    
+//            return ToBitmapFunc(ForceUseAlpha, true);
+//        }
 
         /// <summary>
         /// Update Postage Stamp Image or set it.
         /// </summary>
-        public void UpdatePostageStampImage()
+        private void UpdatePostageStampImage()
         {
             if (Header.ImageType == TgaImageType.NoImageData)
             {

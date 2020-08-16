@@ -85,7 +85,7 @@ namespace AlphaExeC
 		    // panel1
 		    // 
 		    this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Right)));
 		    this.panel1.Controls.Add(this.licenseButton);
 		    this.panel1.Controls.Add(this.aboutButton);
 		    this.panel1.Controls.Add(this.helpButton);
@@ -178,7 +178,7 @@ namespace AlphaExeC
 		    // topsplitContainer1
 		    // 
 		    this.topsplitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Right)));
 		    this.topsplitContainer1.IsSplitterFixed = true;
 		    this.topsplitContainer1.Location = new System.Drawing.Point(12, 12);
 		    this.topsplitContainer1.Name = "topsplitContainer1";
@@ -198,7 +198,7 @@ namespace AlphaExeC
 		    // inputgroupBox1
 		    // 
 		    this.inputgroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Right)));
 		    this.inputgroupBox1.Controls.Add(this.inputsplitContainer);
 		    this.inputgroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 		    this.inputgroupBox1.Location = new System.Drawing.Point(3, 3);
@@ -211,7 +211,7 @@ namespace AlphaExeC
 		    // inputsplitContainer
 		    // 
 		    this.inputsplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Right)));
 		    this.inputsplitContainer.IsSplitterFixed = true;
 		    this.inputsplitContainer.Location = new System.Drawing.Point(3, 16);
 		    this.inputsplitContainer.Name = "inputsplitContainer";
@@ -278,17 +278,18 @@ namespace AlphaExeC
 		    this.inputFormatDropdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 		    this.inputFormatDropdown.FormattingEnabled = true;
 		    this.inputFormatDropdown.Items.AddRange(new object[] {
-		    		    		    "PNG",
-		    		    		    "BMP",
-		    		    		    "DDS",
-		    		    		    "EMF",
-		    		    		    "GIF",
-		    		    		    "JPG",
-		    		    		    "SGI",
-		    		    		    "TGA",
-		    		    		    "TIFF",
-		    		    		    "VTF",
-		    		    		    "WebP"});
+            "All Supported Image Formats",
+            "PNG - Portable Network Graphics",
+            "BMP - Bitmap Image File",
+            "DDS - DirectDraw Surface",
+            "EMF - Windows Metafile",
+            "GIF - Graphics Interchange Format",
+            "JPG - Joint Photographic Experts Group",
+            "SGI - Silicon Graphics Image",
+            "TGA - Targa",
+            "TIFF - Tagged Image File Format",
+            "VTF - Valve Texture Format",
+            "WebP - Google WebP"});
 		    this.inputFormatDropdown.Location = new System.Drawing.Point(100, 8);
 		    this.inputFormatDropdown.Name = "inputFormatDropdown";
 		    this.inputFormatDropdown.Size = new System.Drawing.Size(415, 21);
@@ -306,12 +307,12 @@ namespace AlphaExeC
 		    // outputgroupBox2
 		    // 
 		    this.outputgroupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Right)));
 		    this.outputgroupBox2.Controls.Add(this.outputsplitContainer);
 		    this.outputgroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 		    this.outputgroupBox2.Location = new System.Drawing.Point(4, 3);
 		    this.outputgroupBox2.Name = "outputgroupBox2";
-		    this.outputgroupBox2.Size = new System.Drawing.Size(643, 95);
+		    this.outputgroupBox2.Size = new System.Drawing.Size(649, 95);
 		    this.outputgroupBox2.TabIndex = 1;
 		    this.outputgroupBox2.TabStop = false;
 		    this.outputgroupBox2.Text = "Output";
@@ -319,7 +320,7 @@ namespace AlphaExeC
 		    // outputsplitContainer
 		    // 
 		    this.outputsplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Right)));
 		    this.outputsplitContainer.IsSplitterFixed = true;
 		    this.outputsplitContainer.Location = new System.Drawing.Point(3, 16);
 		    this.outputsplitContainer.Name = "outputsplitContainer";
@@ -335,7 +336,7 @@ namespace AlphaExeC
 		    // 
 		    this.outputsplitContainer.Panel2.Controls.Add(this.outputFormatDropdown);
 		    this.outputsplitContainer.Panel2.Controls.Add(this.label2);
-		    this.outputsplitContainer.Size = new System.Drawing.Size(615, 76);
+		    this.outputsplitContainer.Size = new System.Drawing.Size(621, 76);
 		    this.outputsplitContainer.SplitterDistance = 37;
 		    this.outputsplitContainer.SplitterWidth = 1;
 		    this.outputsplitContainer.TabIndex = 0;
@@ -374,17 +375,17 @@ namespace AlphaExeC
 		    this.outputFormatDropdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 		    this.outputFormatDropdown.FormattingEnabled = true;
 		    this.outputFormatDropdown.Items.AddRange(new object[] {
-		    		    		    "TGA",
-		    		    		    "BMP",
-		    		    		    "DDS",
-		    		    		    "EMF",
-		    		    		    "GIF",
-		    		    		    "JPG",
-		    		    		    "PNG",
-		    		    		    "TIFF",
-		    		    		    "VTF",
-		    		    		    "WebP",
-		    		    		    "WFM"});
+            "TGA - Targa",
+            "BMP - Bitmap Image File",
+            "DDS - DirectDraw Surface",
+            "EMF - Windows Metafile",
+            "GIF - Graphics Interchange Format",
+            "JPG - Joint Photographic Experts Group",
+            "PNG - Portable Network Graphics",
+            "TIFF - Tagged Image File Format",
+            "VTF - Valve Texture Format",
+            "WebP - Google WebP",
+            "WMF - Windows MetaFile"});
 		    this.outputFormatDropdown.Location = new System.Drawing.Point(98, 6);
 		    this.outputFormatDropdown.Name = "outputFormatDropdown";
 		    this.outputFormatDropdown.Size = new System.Drawing.Size(435, 21);
@@ -402,7 +403,7 @@ namespace AlphaExeC
 		    // progressBar1
 		    // 
 		    this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Right)));
 		    this.progressBar1.Location = new System.Drawing.Point(12, 630);
 		    this.progressBar1.Name = "progressBar1";
 		    this.progressBar1.Size = new System.Drawing.Size(1121, 23);
@@ -411,10 +412,10 @@ namespace AlphaExeC
 		    // imageList
 		    // 
 		    this.imageList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Left) 
-		    		    		    | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 		    this.imageList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-		    		    		    this.file});
+            this.file});
 		    this.imageList.GridLines = true;
 		    this.imageList.Location = new System.Drawing.Point(12, 157);
 		    this.imageList.MultiSelect = false;
@@ -464,6 +465,7 @@ namespace AlphaExeC
 		    ((System.ComponentModel.ISupportInitialize)(this.outputsplitContainer)).EndInit();
 		    this.outputsplitContainer.ResumeLayout(false);
 		    this.ResumeLayout(false);
+
 		}
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 		private System.Windows.Forms.ColumnHeader file;

@@ -6,7 +6,6 @@ using TGASharpLib;
 using System.Drawing;
 using WebPWrapper;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ConvertImage
 {
@@ -54,6 +53,38 @@ namespace ConvertImage
             {"bmp", (x, y, z) => toGeneric(x, y, z, ImageFormat.Bmp) },
             {"webp", toWebP }
         };
+        
+        public static Bitmap getThumbnail(string path, int width = 64, int height = 64) {
+            
+            switch (Path.GetExtension(path).ToLower()){
+                case ".tga":
+                    using (TGA tga = new TGA(path)) {
+                        Bitmap rawThumbnail = tga.GetThumbnail();
+                        Bitmap thumbnail = new Bitmap(width, height);
+                        
+                        using (Graphics g = Graphics.FromImage(thumbnail)) {
+                            g.DrawImage(rawThumbnail, 0, 0, width, height);
+                            return thumbnail;
+                        }
+                    }
+                case ".webp":
+                    using (WebP webp = new WebP()){
+                        return webp.LoadThumbnail(path, width, height);
+                    }
+                case ".emf":
+                    using (Metafile source = new Metafile(path)){
+                        Bitmap target = new Bitmap(width, height);
+                        using (var g = Graphics.FromImage(target)) {
+                            g.Clear(Color.White);
+                            g.DrawImage(source, 0, 0, width, height);
+                            return target;
+                        }
+                    }
+                default:
+                    Image src = Image.FromFile(path);
+                    return (Bitmap) src.GetThumbnailImage(width, height, () => false, IntPtr.Zero);
+            }
+        }
 
 
         #region from bitmap
@@ -94,16 +125,22 @@ namespace ConvertImage
 
         public static Bitmap fromEMF(string filepath)
         {
-
-            int width = 1024;
-            int height = 1024;
-
-            var source = new Metafile(filepath);
-            var target = new Bitmap(width, height);
-            using (var g = Graphics.FromImage(target))
-            {
-                g.DrawImage(source, 0, 0, width, height);
-                return target;
+            using (Metafile source = new Metafile(filepath)){
+                
+                MetafileHeader header = source.GetMetafileHeader();
+                
+                //TODO get Scale from slider in Settings through the configuration class that Viruz refuses to make :YagooCry:
+                float scale = 4f;
+                int width = (int)Math.Round((scale * source.Width / header.DpiX * 100), 0, MidpointRounding.ToEven);
+                int height = (int)Math.Round((scale * source.Height / header.DpiY * 100), 0, MidpointRounding.ToEven);
+                //TODO set background color to white or transparent depending on the target format.
+                Bitmap target = new Bitmap(width, height);
+                
+                using (var g = Graphics.FromImage(target))
+                {
+                    g.DrawImage(source, 0, 0, width, height);
+                    return target;
+                }
             }
         }
 

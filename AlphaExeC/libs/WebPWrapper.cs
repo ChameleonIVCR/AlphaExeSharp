@@ -48,6 +48,17 @@ namespace WebPWrapper
             }
             catch (Exception ex) { throw new Exception(ex.Message + "\r\nIn WebP.Load"); }
         }
+        
+        public Bitmap LoadThumbnail(string pathFileName, int width, int height)
+        {
+            try
+            {
+                byte[] rawWebP = File.ReadAllBytes(pathFileName);
+
+                return GetThumbnailFast(rawWebP, width, height);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message + "\r\nIn WebP.LoadThumbnail"); }
+        }
 
         /// <summary>Decode a WebP image</summary>
         /// <param name="rawWebP">The data to uncompress</param>
