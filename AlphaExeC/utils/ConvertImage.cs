@@ -9,9 +9,8 @@ using System.Linq;
 
 namespace ConvertImage
 {
-    public static class ConvertImage
+    public class ConvertImage
     {
-
         // stole this from funclibrary.cs, can remove from funclibrary.cs probably once this class is fully implemented
         private static ImageCodecInfo GetEncoder(ImageFormat format)
         {
@@ -58,21 +57,21 @@ namespace ConvertImage
             
             switch (Path.GetExtension(path).ToLower()){
                 case ".tga":
-                    using (TGA tga = new TGA(path)) {
-                        Bitmap rawThumbnail = tga.GetThumbnail();
-                        Bitmap thumbnail = new Bitmap(width, height);
-                        
-                        using (Graphics g = Graphics.FromImage(thumbnail)) {
-                            g.DrawImage(rawThumbnail, 0, 0, width, height);
-                            return thumbnail;
-                        }
+                    TGA tga = new TGA(path);
+                    Bitmap rawThumbnail = tga.GetThumbnail();
+                    Bitmap thumbnail = new Bitmap(width, height);
+                    
+                    using (Graphics g = Graphics.FromImage(thumbnail)) {
+                        g.DrawImage(rawThumbnail, 0, 0, width, height);
+                        return thumbnail;
                     }
+                
                 case ".webp":
-                    using (WebP webp = new WebP()){
+                    using (WebP webp = new WebP()) {
                         return webp.LoadThumbnail(path, width, height);
                     }
                 case ".emf":
-                    using (Metafile source = new Metafile(path)){
+                    using (Metafile source = new Metafile(path)) {
                         Bitmap target = new Bitmap(width, height);
                         using (var g = Graphics.FromImage(target)) {
                             g.Clear(Color.White);

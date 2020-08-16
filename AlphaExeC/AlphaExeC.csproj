@@ -77,6 +77,7 @@
     </Compile>
     <Compile Include="utils\ConvertImage.cs" />
     <Compile Include="utils\FuncLibrary.cs" />
+    <Compile Include="utils\ImportedImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ui\About.resx">
