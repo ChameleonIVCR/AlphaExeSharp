@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
+using System.IO;
 
 namespace ConvertImage {
 
@@ -17,7 +17,15 @@ namespace ConvertImage {
         }
         
         public void convert() {
-            toFile(outputFormat, fromFile(filepath), outputPath, quality);
+            toFile(outputFormat, fromFile(filepath), Path.Combine(outputPath, Path.GetFileNameWithoutExtension(filepath)+"."+outputFormat), quality);
+        }
+        
+        public Bitmap fetchThumbnail() {
+            return thumbnail;
+        }
+        
+        public string getPath() {
+            return filepath;
         }
         
         public static void setConversionVariables(string outP, string outF, int qual) {

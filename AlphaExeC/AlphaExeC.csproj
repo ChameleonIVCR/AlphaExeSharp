@@ -75,6 +75,7 @@
       <DependentUpon>Options.resx</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="utils\Configuration.cs" />
     <Compile Include="utils\ConvertImage.cs" />
     <Compile Include="utils\FuncLibrary.cs" />
     <Compile Include="utils\ImportedImage.cs" />
@@ -99,6 +100,7 @@
     <Reference Include="System" />
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Primitives" />
     <Reference Include="System.Linq" />

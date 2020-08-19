@@ -1,16 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using TGASharpLib;
 
 namespace AlphaExeC {
     //Handle form events here
     public partial class MainForm : Form {
+        private static Dictionary<int, ConvertImage.ImportedImage> imageStash;
+        private static ImageList thumbnailList;
+        private static int counter = 0;
+        
         public MainForm() {
             //Start main form
             InitializeComponent();
+            imageStash = new Dictionary<int, ConvertImage.ImportedImage>();
+            thumbnailList = new ImageList();
+            thumbnailList.ImageSize = new Size(64, 64);
+            //temporary fix until we have config class.
             inputFormatDropdown.SelectedIndex = 0;
             outputFormatDropdown.SelectedIndex = 0;
         }
@@ -18,15 +26,6 @@ namespace AlphaExeC {
         //Called when the selected item changes in the list
         private void imageListSelectedIndexChange(object sender, EventArgs e) {
 
-//            string path = System.String.Empty;
-//
-//            foreach (ListViewItem item in imageList.SelectedItems) {
-//                path = item.Text;
-//            }
-//
-//            //Run in a thread to avoid blocking the app as thumbnail generates
-//            Thread thread = new Thread(() => getThumbnail(path));
-//            thread.Start();
         }
         
         //Input related stuff
@@ -40,34 +39,34 @@ namespace AlphaExeC {
         void inputAddClick(object sender, EventArgs e) {
             string path = inputTextBox.Text;
             if (!String.IsNullOrEmpty(path)  &&  Directory.Exists(path)) {
-
                 string[] filestoadd = Directory.GetFiles(path); 
                 string[] formats = new string[inputFormatDropdown.Items.Count];
+                
                 //TODO get this from configuration
-//                if (allowMoreFormatsCheckbox.Checked == false) {
-                    formats[0] = inputFormatDropdown.Text.ToLower();
-                    Array.Resize(ref formats, 1);
-//                }
-//                else {
-//                    for(int i = 0; i < inputFormatDropdown.Items.Count; i++) {
-//                        formats[i] = inputFormatDropdown.Items[i].ToString().ToLower();
-//                    }
+                //formats[0] = inputFormatDropdown.Text.ToLower();
+                formats[0] = "png";
+                Array.Resize(ref formats, 1);
+                
                 foreach(string item in filestoadd) {
                 string itemlower = item.ToLower();
                     foreach (string format in formats) {
-                        if (itemlower.EndsWith("."+format) 
-                            && imageList.FindItemWithText(itemlower) == null) {
-                            
-                            imageList.Items.Add(item);
+                        if (itemlower.EndsWith("."+format) && imageList.FindItemWithText(itemlower) == null) {
+                        
+                            imageStash.Add(counter, new ConvertImage.ImportedImage(item));
+                            thumbnailList.Images.Add(imageStash[counter].fetchThumbnail());
+                            counter++;
                         }
                     }
                 }
-//                WritetoStatus(filecount.ToString()+" files added.\n");
+                imageList.LargeImageList = thumbnailList;
+                for (int j = 0; j < thumbnailList.Images.Count; j++)
+                {
+                    ListViewItem item = new ListViewItem(Path.GetFileNameWithoutExtension(imageStash[j].getPath()));
+                    item.ImageIndex = j;
+                    imageList.Items.Add(item);
+                }
+                //imageList.LargeImageList = thumbnailList;
             }
-//            else {
-                //Add textbox empty warning to status
-//                WritetoStatus("Please select a valid folder first.\n");
-//            }
         }
         
         //Ouput related stuff
@@ -88,8 +87,13 @@ namespace AlphaExeC {
 //                } else {
 //                    outputPath = outputTextBox.Text;
 //                }
-                string selectedImagePath = imageList.SelectedItems[0].Text;
-                FuncLibrary.Convert(selectedImagePath, outputPath, outputFormatDropdown.SelectedItem.ToString(), true, 100);
+//                string selectedImagePath = imageList.SelectedItems[0].Text;
+//                FuncLibrary.Convert(selectedImagePath, outputPath, outputFormatDropdown.SelectedItem.ToString(), true, 100);
+                ConvertImage.ImportedImage.setConversionVariables(outputPath, "jpg", 80);
+                foreach(KeyValuePair<int, ConvertImage.ImportedImage> kvp in imageStash){
+                    Console.WriteLine(kvp.Value.getPath());
+                    kvp.Value.convert();
+                }
                 //TODO better error handling
             } catch (ArgumentException) {
                 MessageBox.Show("You need to specify one image", "Error");
@@ -104,8 +108,8 @@ namespace AlphaExeC {
         
         void clearButtonClick(object sender, EventArgs e) {
             imageList.Items.Clear();
-//            previewBox.Image = null;
-//            statusTextBox.Clear();
+            thumbnailList.Images.Clear();
+            imageStash.Clear();
         }
         
         void stopButtonClick(object sender, System.EventArgs e) {
