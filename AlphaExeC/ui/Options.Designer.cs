@@ -31,7 +31,7 @@ namespace AlphaExeC
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Options));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.replaceRGBwithA = new System.Windows.Forms.CheckBox();
             this.alphaCheckBox = new System.Windows.Forms.CheckBox();
             this.pixelFormatDropdown = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@ namespace AlphaExeC
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.replaceRGBwithA);
             this.groupBox1.Controls.Add(this.alphaCheckBox);
             this.groupBox1.Controls.Add(this.pixelFormatDropdown);
             this.groupBox1.Controls.Add(this.label2);
@@ -70,15 +70,15 @@ namespace AlphaExeC
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
             // 
-            // checkBox1
+            // replaceRGBwithA
             // 
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(187, 94);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(131, 24);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "Replace RGB with A";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.replaceRGBwithA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.replaceRGBwithA.Location = new System.Drawing.Point(187, 94);
+            this.replaceRGBwithA.Name = "replaceRGBwithA";
+            this.replaceRGBwithA.Size = new System.Drawing.Size(131, 24);
+            this.replaceRGBwithA.TabIndex = 6;
+            this.replaceRGBwithA.Text = "Replace RGB with A";
+            this.replaceRGBwithA.UseVisualStyleBackColor = true;
             // 
             // alphaCheckBox
             // 
@@ -96,18 +96,18 @@ namespace AlphaExeC
             this.pixelFormatDropdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pixelFormatDropdown.FormattingEnabled = true;
             this.pixelFormatDropdown.Items.AddRange(new object[] {
-                                    "32 bits ARGB -- DEFAULT",
-                                    "64 bits ARGB",
-                                    "64 bits PARGB",
-                                    "48 bits RGB",
-                                    "32 bits PARG",
-                                    "32 bits RGB",
-                                    "24 bits RGB",
-                                    "16 bits ARGB",
-                                    "16 bits RGB",
-                                    "16 bits Grayscale",
-                                    "8 bits Indexed",
-                                    "4 bits Indexed"});
+            "32 bits ARGB -- DEFAULT",
+            "64 bits ARGB",
+            "64 bits PARGB",
+            "48 bits RGB",
+            "32 bits PARG",
+            "32 bits RGB",
+            "24 bits RGB",
+            "16 bits ARGB",
+            "16 bits RGB",
+            "16 bits Grayscale",
+            "8 bits Indexed",
+            "4 bits Indexed"});
             this.pixelFormatDropdown.Location = new System.Drawing.Point(116, 58);
             this.pixelFormatDropdown.Name = "pixelFormatDropdown";
             this.pixelFormatDropdown.Size = new System.Drawing.Size(202, 21);
@@ -127,18 +127,18 @@ namespace AlphaExeC
             this.qualityNumberInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.qualityNumberInput.Location = new System.Drawing.Point(56, 19);
             this.qualityNumberInput.Minimum = new decimal(new int[] {
-                                    10,
-                                    0,
-                                    0,
-                                    0});
+            10,
+            0,
+            0,
+            0});
             this.qualityNumberInput.Name = "qualityNumberInput";
             this.qualityNumberInput.Size = new System.Drawing.Size(45, 20);
             this.qualityNumberInput.TabIndex = 2;
             this.qualityNumberInput.Value = new decimal(new int[] {
-                                    80,
-                                    0,
-                                    0,
-                                    0});
+            80,
+            0,
+            0,
+            0});
             this.qualityNumberInput.ValueChanged += new System.EventHandler(this.qualityNumberInputChanged);
             // 
             // qualityBar
@@ -185,10 +185,10 @@ namespace AlphaExeC
             this.dxtCompressionDropdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dxtCompressionDropdown.FormattingEnabled = true;
             this.dxtCompressionDropdown.Items.AddRange(new object[] {
-                                    "Optimal -- DEFAULT",
-                                    "Low",
-                                    "Medium",
-                                    "High"});
+            "Optimal -- DEFAULT",
+            "Low",
+            "Medium",
+            "High"});
             this.dxtCompressionDropdown.Location = new System.Drawing.Point(116, 83);
             this.dxtCompressionDropdown.Name = "dxtCompressionDropdown";
             this.dxtCompressionDropdown.Size = new System.Drawing.Size(202, 21);
@@ -209,11 +209,11 @@ namespace AlphaExeC
             this.aDropdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aDropdown.FormattingEnabled = true;
             this.aDropdown.Items.AddRange(new object[] {
-                                    "BGRA -- DEFAULT",
-                                    "DXT5",
-                                    "DXT3",
-                                    "DXT1",
-                                    "RGBA"});
+            "BGRA -- DEFAULT",
+            "DXT5",
+            "DXT3",
+            "DXT1",
+            "RGBA"});
             this.aDropdown.Location = new System.Drawing.Point(116, 51);
             this.aDropdown.Name = "aDropdown";
             this.aDropdown.Size = new System.Drawing.Size(202, 21);
@@ -234,11 +234,11 @@ namespace AlphaExeC
             this.rgbDropdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rgbDropdown.FormattingEnabled = true;
             this.rgbDropdown.Items.AddRange(new object[] {
-                                    "DXT5 -- DEFAULT",
-                                    "DXT3",
-                                    "DXT1",
-                                    "BGRA",
-                                    "RGBA"});
+            "DXT5 -- DEFAULT",
+            "DXT3",
+            "DXT1",
+            "BGRA",
+            "RGBA"});
             this.rgbDropdown.Location = new System.Drawing.Point(116, 19);
             this.rgbDropdown.Name = "rgbDropdown";
             this.rgbDropdown.Size = new System.Drawing.Size(202, 21);
@@ -261,6 +261,7 @@ namespace AlphaExeC
             this.saveButton.TabIndex = 2;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
             // 
             // cancelButton
             // 
@@ -293,6 +294,7 @@ namespace AlphaExeC
             ((System.ComponentModel.ISupportInitialize)(this.qualityBar)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox dxtCompressionDropdown;
@@ -304,7 +306,7 @@ namespace AlphaExeC
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox alphaCheckBox;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox replaceRGBwithA;
         private System.Windows.Forms.ComboBox pixelFormatDropdown;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown qualityNumberInput;
